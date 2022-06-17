@@ -1,11 +1,9 @@
 import React from "react";
-import fetch from "isomorphic-unfetch";
-import { useRouter } from "next/router";
-import Link from "next/link";
+// import { useRouter } from "next/router";
 import { useForm } from "react-hook-form";
 
-const index = () => {
-  const router = useRouter();
+const Index = () => {
+  // const router = useRouter();
   const {
     register,
     handleSubmit,
@@ -54,4 +52,4 @@ const index = () => {
   );
 };
 
-export default index;
+export default Index;
