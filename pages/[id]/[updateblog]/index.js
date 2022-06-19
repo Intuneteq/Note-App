@@ -1,21 +1,44 @@
+import fetch from 'isomorphic-unfetch';
+
 import React from "react";
-// import { useRouter } from "next/router";
+import { useRouter } from "next/router";
 import { useForm } from "react-hook-form";
 
-const Index = () => {
-  // const router = useRouter();
+const EditNote = ({note}) => {
+  const router = useRouter();
   const {
     register,
     handleSubmit,
     formState: { errors },
-  } = useForm();
+  } = useForm({
+    defaultValues: {
+      title: note.title,
+      description: note.description
+    }
+  });
 
-  const onSubmit = async (data) => {};
+  const onSubmit = async (data) => {
+    try {
+      const noteID = router.query.id;
+
+      const res = await fetch(`http://localhost:3000/api/notes/${noteID}`, {
+        method: "PUT",
+        headers: {
+          "Accept": "application/json",
+          "Content-Type": "application/json"
+        },
+        body: JSON.stringify(data)
+      }) 
+      router.push("/");
+    } catch (error) {
+      
+    }
+  };
 
   return (
     <div className="pt-20 bg-yellow-100 h-screen">
       <h1 className="text-center font-black md:text-xl lg:text-3xl xl:text-4xl uppercase">
-        UPDATE Note
+        EDIT NOTE
       </h1>
       <div className="flex justify-center items-center">
         <form onSubmit={handleSubmit(onSubmit)} className="block">
@@ -52,4 +75,12 @@ const Index = () => {
   );
 };
 
-export default Index;
+EditNote.getInitialProps = async ({query: {id} }) => {
+  const res = await fetch(`http://localhost:3000/api/notes/${id}`);
+  const { data } = await res.json();
+
+  return {note: data}
+}
+
+
+export default EditNote;
