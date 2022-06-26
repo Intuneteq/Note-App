@@ -1,16 +1,20 @@
 import Link from "next/link";
 import { useRouter } from 'next/router';
+import { useState } from 'react';
 
 import fetch from 'isomorphic-unfetch';
+import { Oval } from  'react-loader-spinner';
 
 const Homepage = ({ notes }) => {
   const router = useRouter();
+const [isDeleting, setIsDeleting] = useState(false);
 
   const handleDelete = async (id) => {
     const res = await fetch(`http://localhost:3000/api/notes/${id}`, {
       method: "DELETE",
     });
-      const data = res.json()
+      const data = res.json();
+      setIsDeleting(true);
       console.log('RESPONSE', data);
       router.push('/')
     
@@ -21,6 +25,7 @@ const Homepage = ({ notes }) => {
       <h1 className="text-center font-black md:text-xl lg:text-3xl xl:text-4xl">
         YOUR NOTES
       </h1>
+      {isDeleting ? <Oval color="#00BFFF" height={80} width={80} /> : ""}
       <div className="my-5 item-center w-full h-full justify-center items-center gap-x-10 gap-y-3 flex flex-col md:flex-row md:flex-wrap">
         {notes.map((note) => (
           <div

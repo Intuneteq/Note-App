@@ -1,4 +1,5 @@
 import "../styles/globals.css";
+import "react-loader-spinner/dist/loader/css/react-spinner-loader.css";
 import Layout from "../components/Layout";
 import Head from "next/head";
 
