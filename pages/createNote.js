@@ -1,10 +1,9 @@
 import React from "react";
 import fetch from "isomorphic-unfetch";
 import { useRouter } from "next/router";
-import Link from "next/link";
 import { useForm } from "react-hook-form";
 
-const createNote = () => {
+const CreateNote = () => {
   const router = useRouter();
   const {
     register,
@@ -67,4 +66,4 @@ const createNote = () => {
   );
 };
 
-export default createNote;
+export default CreateNote;
