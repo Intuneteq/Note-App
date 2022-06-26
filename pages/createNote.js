@@ -1,9 +1,10 @@
-import React from "react";
+import React, { useState } from "react";
 import fetch from "isomorphic-unfetch";
 import { useRouter } from "next/router";
 import { useForm } from "react-hook-form";
 
 const CreateNote = () => {
+  const [loading, setLoading] = useState(false);
   const router = useRouter();
   const {
     register,
@@ -13,8 +14,9 @@ const CreateNote = () => {
 
   const onSubmit = async (data) => {
     console.log(data);
+    setLoading(true);
     try {
-      const res = await fetch("http://localhost:3000/api/notes/", {
+      const res = await fetch("https://tobi-note-app.vercel.app/api/notes/", {
         method: "POST",
         headers: {
           Accept: "application/json",
@@ -53,12 +55,21 @@ const CreateNote = () => {
             {errors.description && <span>This field is required</span>}
           </div>
           <div className="flex justify-center items-center my-5 font-bold uppercase lg:w-screen" >
+            {loading ? 
             <button
+            className="font-bold bg-stone-700 p-3 rounded-md hover:text-stone-700  lg:w-3/5 hover:bg-black uppercase items-center"
+            type="submit"
+          >
+            Creating Note
+          </button> : 
+          
+          <button
               className="font-bold bg-stone-700 p-3 rounded-md hover:text-stone-700  lg:w-3/5 hover:bg-black uppercase items-center"
               type="submit"
             >
               Create NOTE
             </button>
+          }
           </div>
         </form>
       </div>
