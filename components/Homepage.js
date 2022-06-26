@@ -10,7 +10,7 @@ const Homepage = ({ notes }) => {
 const [isDeleting, setIsDeleting] = useState(false);
 
   const handleDelete = async (id) => {
-    const res = await fetch(`http://localhost:3000/api/notes/${id}`, {
+    const res = await fetch(`https://tobi-note-app.vercel.app/api/notes/${id}`, {
       method: "DELETE",
     });
       const data = res.json();

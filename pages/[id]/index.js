@@ -12,7 +12,7 @@ export default function MyNote ({note}) {
 
   const handleDelete = async (id) => {
     try {
-      const res = await fetch(`http://localhost:3000/api/notes/${id}`, {
+      const res = await fetch(`https://tobi-note-app.vercel.app/api/notes/${id}`, {
       method: "DELETE",
     });
       
@@ -44,7 +44,7 @@ export default function MyNote ({note}) {
 }
 
 MyNote.getInitialProps = async ({query: {id} }) => {
-    const res = await fetch(`http://localhost:3000/api/notes/${id}`);
+    const res = await fetch(`https://tobi-note-app.vercel.app/api/notes/${id}`);
     const { data } = await res.json();
   
     return {note: data}

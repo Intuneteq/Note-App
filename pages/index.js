@@ -12,7 +12,7 @@ export default function Home({notes}) {
 
 
 Home.getInitialProps = async() => {
-  const res = await fetch("http://localhost:3000/api/notes/");
+  const res = await fetch("https://tobi-note-app.vercel.app/api/notes/",  {mode: 'no-cors'});
   const  {data}  = await res.json();
 
   return  {notes: data};
