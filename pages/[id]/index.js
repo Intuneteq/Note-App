@@ -6,7 +6,7 @@ import { useRouter } from 'next/router';
 import Link from 'next/link';
 
 
-export default MyNote = ({note}) => {
+export default function MyNote ({note}) {
   const router = useRouter();
   const [isDeleting, setIsDeleting] = useState(false);
 
