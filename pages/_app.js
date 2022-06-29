@@ -1,5 +1,7 @@
 import "../styles/globals.css";
 import "react-loader-spinner/dist/loader/css/react-spinner-loader.css";
+import { ToastContainer } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
 import Layout from "../components/Layout";
 import Head from "next/head";
 
@@ -12,6 +14,7 @@ function MyApp({ Component, pageProps }) {
         <link rel="icon" href="/foli.png" />
       </Head>
       <Layout>
+        <ToastContainer />
         <Component {...pageProps} />
       </Layout>
     </div>

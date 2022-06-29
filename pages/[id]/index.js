@@ -1,5 +1,6 @@
 import fetch from 'isomorphic-unfetch';
 import { Oval } from  'react-loader-spinner';
+import { toast } from 'react-toastify';
 
 import { useState } from 'react';
 import { useRouter } from 'next/router';
@@ -19,6 +20,7 @@ export default function MyNote ({note}) {
       const data = res.json()
       setIsDeleting(true);
       console.log('RESPONSE', data);
+      toast.warn("Deleted");
       router.push('/')
     
     } catch (error) {

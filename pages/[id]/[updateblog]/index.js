@@ -21,11 +21,12 @@ const EditNote = ({note}) => {
     try {
       const noteID = router.query.id;
 
-      const res = await fetch(`http://localhost:3000/api/notes/${noteID}`, {
+      const res = await fetch(`https://tobi-note-app.vercel.app/api/notes/${noteID}`, {
         method: "PUT",
         headers: {
           "Accept": "application/json",
-          "Content-Type": "application/json"
+          "Content-Type": "application/json",
+          "access-control-allow-origin": "*"
         },
         body: JSON.stringify(data)
       }) 
@@ -76,7 +77,7 @@ const EditNote = ({note}) => {
 };
 
 EditNote.getInitialProps = async ({query: {id} }) => {
-  const res = await fetch(`http://localhost:3000/api/notes/${id}`);
+  const res = await fetch(`https://tobi-note-app.vercel.app/api/notes/${id}`);
   const { data } = await res.json();
 
   return {note: data}

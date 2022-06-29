@@ -9,7 +9,7 @@ export default async (req, res) => {
     method,
   } = req;
 
-  switch (method) {
+  switch (method, Access-Control-Allow-Origin) {
     case "GET":
       try {
         const notes = await mynote.findById(id);
@@ -30,7 +30,7 @@ export default async (req, res) => {
       }
       break;
 
-    case "PUT":
+    case "PUT", "https://tobi-note-app.vercel.app/":
       try {
         const notes = await mynote.findByIdAndUpdate(id, req.body, {
           new: true,

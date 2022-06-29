@@ -1,18 +1,18 @@
 import Link from "next/link";
+import axios from 'axios';
 import { useRouter } from 'next/router';
 import { useState } from 'react';
 
 import fetch from 'isomorphic-unfetch';
 import { Oval } from  'react-loader-spinner';
 
-const Homepage = ({ notes }) => {
+const Homepage = ( {notes} ) => {
   const router = useRouter();
 const [isDeleting, setIsDeleting] = useState(false);
 
   const handleDelete = async (id) => {
-    const res = await fetch(`https://tobi-note-app.vercel.app/api/notes/${id}`, {
-      method: "DELETE",
-    });
+    console.log('this is the id', id);
+    const res = await axios.delete(`https://tobi-note-app.vercel.app/api/notes/${id}`);
       const data = res.json();
       setIsDeleting(true);
       console.log('RESPONSE', data);
@@ -37,7 +37,7 @@ const [isDeleting, setIsDeleting] = useState(false);
             </h2>
             <p className="text-justify px-3">{note.description.slice(0, 170)}...</p>
             <div className="absolute inset-x-1/4 bottom-0 flex justify-center gap-x-5">
-              <Link href={`/${note._id}`}>
+              <Link href={`/note/${note._id}`}>
                 <a className="font-bold hover:text-stone-700">VIEW</a>
               </Link>
               <button onClick={() => handleDelete(note._id)} className="font-bold hover:text-stone-700">DELETE</button>
